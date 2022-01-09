@@ -14,6 +14,8 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      - name: Enable desktop support
+        run: flutter config --enable-macos-desktop
       - name: Install dependencies
         run: flutter pub get
       - name: Run tests
