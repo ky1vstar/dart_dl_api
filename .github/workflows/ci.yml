@@ -23,7 +23,7 @@ jobs:
         run: flutter pub get
       - name: Run tests
         working-directory: ./example
-        run: flutter devices
+        run: flutter test integration_test
 
 #  integration_macos:
 #    runs-on: macOS-latest
