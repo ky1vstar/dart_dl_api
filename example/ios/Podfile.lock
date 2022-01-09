@@ -1,0 +1,28 @@
+PODS:
+  - dart_dl_api (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - integration_test (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - dart_dl_api (from `.symlinks/plugins/dart_dl_api/ios`)
+  - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+
+EXTERNAL SOURCES:
+  dart_dl_api:
+    :path: ".symlinks/plugins/dart_dl_api/ios"
+  Flutter:
+    :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+
+SPEC CHECKSUMS:
+  dart_dl_api: 0f309722fe99b2ba992b859df427ceed482af05c
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  integration_test: 7db6d89f336f671dcbc7563ee27a5b08f6f8aee1
+
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+
+COCOAPODS: 1.10.2
