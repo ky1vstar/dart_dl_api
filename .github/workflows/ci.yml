@@ -7,17 +7,37 @@ on:
 #    branches: [ master ]
 
 jobs:
-  integration_macos:
+  integration_ios:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Enable desktop support
-        run: flutter config --enable-macos-desktop
+      - uses: futureware-tech/simulator-action@v1
+          with:
+            model: 'iPhone 8'
+      - name: Flutter Doctor
+        run: flutter doctor
       - name: Install dependencies
         run: flutter pub get
       - name: Run tests
         working-directory: ./example
-        run: flutter test integration_test -d macos
+        run: flutter devices
+
+#  integration_macos:
+#    runs-on: macOS-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          channel: 'stable'
+#      - name: Enable desktop support
+#        run: flutter config --enable-macos-desktop
+#      - name: Flutter Doctor
+#        run: flutter doctor
+#      - name: Install dependencies
+#        run: flutter pub get
+#      - name: Run tests
+#        working-directory: ./example
+#        run: flutter test integration_test -d macos
