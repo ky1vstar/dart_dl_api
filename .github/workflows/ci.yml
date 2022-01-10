@@ -52,8 +52,8 @@ jobs:
       ## Android integration
       - name: Run tests on Android Emulator
         if: ${{ matrix.platform == 'android' }}
-        working-directory: ./example
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: flutter test integration_test
+        working-directory: ./example
