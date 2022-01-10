@@ -9,15 +9,16 @@ on:
 jobs:
   integration:
     strategy:
+      fail-fast: false
       matrix:
         platform: [ios, macos, android]
         include:
           - platform: ios
-            os: macOS-latest
+            os: macos-latest
           - platform: macos
-            os: macOS-latest
+            os: macos-latest
           - platform: android
-            os: macOS-latest
+            os: macos-latest
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -38,17 +39,21 @@ jobs:
         if: ${{ matrix.platform == 'macos' }}
         run: flutter config --enable-macos-desktop
 
-      ## Android integration
-      - name: Start up Android Emulator
-        if: ${{ matrix.platform == 'android' }}
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-
       - name: Run Flutter Doctor
         run: flutter doctor
       - name: Install dependencies
         run: flutter pub get
+
       - name: Run tests
+        if: ${{ matrix.platform != 'android' }}
         working-directory: ./example
         run: flutter test integration_test
+
+      ## Android integration
+      - name: Run tests on Android Emulator
+        if: ${{ matrix.platform == 'android' }}
+        working-directory: ./example
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: flutter test integration_test
