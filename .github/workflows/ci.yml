@@ -1,4 +1,4 @@
-name: Dart CI
+name: CI
 
 on:
   push:
@@ -7,37 +7,49 @@ on:
 #    branches: [ master ]
 
 jobs:
-  integration_ios:
-    runs-on: macOS-latest
+  integration:
+    strategy:
+      matrix:
+        platform: [ios, macos, android]
+        include:
+          - platform: ios
+            os: macOS-latest
+          - platform: macos
+            os: macOS-latest
+          - platform: android
+            os: macOS-latest
+
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - uses: futureware-tech/simulator-action@v1
+
+      ## iOS integration
+      - name: Start up iOS Simulator
+      - if: ${{ matrix.platform == 'ios' }}
+        uses: futureware-tech/simulator-action@v1
         with:
           model: 'iPhone 8'
-      - name: Flutter Doctor
+
+      ## macOS integration
+      - name: Enable desktop support
+        if: ${{ matrix.platform == 'macos' }}
+        run: flutter config --enable-macos-desktop
+
+      ## Android integration
+      - name: Start up Android Emulator
+        if: ${{ matrix.platform == 'android' }}
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
+
+      - name: Run Flutter Doctor
         run: flutter doctor
       - name: Install dependencies
         run: flutter pub get
       - name: Run tests
         working-directory: ./example
         run: flutter test integration_test
-
-#  integration_macos:
-#    runs-on: macOS-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          channel: 'stable'
-#      - name: Enable desktop support
-#        run: flutter config --enable-macos-desktop
-#      - name: Flutter Doctor
-#        run: flutter doctor
-#      - name: Install dependencies
-#        run: flutter pub get
-#      - name: Run tests
-#        working-directory: ./example
-#        run: flutter test integration_test -d macos
