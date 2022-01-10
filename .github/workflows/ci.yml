@@ -55,5 +55,5 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
+          working-directory: ./example
           script: flutter test integration_test
-        working-directory: ./example
