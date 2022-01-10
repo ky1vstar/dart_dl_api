@@ -28,7 +28,7 @@ jobs:
 
       ## iOS integration
       - name: Start up iOS Simulator
-      - if: ${{ matrix.platform == 'ios' }}
+        if: ${{ matrix.platform == 'ios' }}
         uses: futureware-tech/simulator-action@v1
         with:
           model: 'iPhone 8'
