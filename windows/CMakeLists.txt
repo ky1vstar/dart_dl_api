@@ -29,7 +29,7 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
   ../third_party/dart-sdk/src/runtime/
 )
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
-target_compile_options(${PLUGIN_NAME} PRIVATE /W4)
+target_compile_options(${PLUGIN_NAME} PRIVATE -Wno-error)
 
 # List of absolute paths to libraries that should be bundled with the plugin
 set(dart_dl_api_bundled_libraries
