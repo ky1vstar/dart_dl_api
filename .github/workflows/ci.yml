@@ -69,7 +69,8 @@ jobs:
         working-directory: ./example
         run: |
           Xvfb :1 -screen 0 640x480x24 -fbdir /var/tmp&
-          DISPLAY=localhost:1.0 flutter test integration_test
+          export DISPLAY=localhost:1.0
+          flutter test integration_test
 
       ## Android integration
       - name: Run tests on Android Emulator
