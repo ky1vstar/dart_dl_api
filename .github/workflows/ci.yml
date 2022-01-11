@@ -42,7 +42,7 @@ jobs:
       ## Android integration
       - name: Start up Android Emulator
         if: ${{ matrix.platform == 'android' }}
-        uses: ky1vstar/android-emulator-runner@v2
+        uses: ky1vstar/android-emulator-runner@test
         with:
           api-level: 29
 
