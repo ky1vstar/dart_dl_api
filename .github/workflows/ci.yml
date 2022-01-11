@@ -67,8 +67,7 @@ jobs:
       - name: Run tests
         if: ${{ matrix.platform != 'android' }}
         working-directory: ./example
-        run: flutter build linux
-#        run: flutter test integration_test
+        run: flutter test integration_test
 
       ## Android integration
       - name: Run tests on Android Emulator
@@ -77,4 +76,4 @@ jobs:
         with:
           api-level: 29
           working-directory: ./example
-          script: flutter test integration_test
+          script: flutter test integration_test linux
