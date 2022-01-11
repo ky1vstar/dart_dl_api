@@ -23,8 +23,9 @@ class DartDlApi {
     } else if (Platform.isWindows) {
       List<String> executableDirectory = Platform.resolvedExecutable.split('/')
         ..removeLast();
+      print(Directory(path.joinAll(executableDirectory)).listSync());
       lib = DynamicLibrary.open(
-        path.joinAll(executableDirectory + ["dart_dl_api_plugin.dll"]),
+        path.joinAll(executableDirectory + ["dart_dl_api.dll"]),
       );
     } else {
       throw UnsupportedError(
