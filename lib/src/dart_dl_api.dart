@@ -29,8 +29,8 @@ class DartDlApi {
           lib = DynamicLibrary.open("dart_dl_api.dll");
           print("Loaded dart_dl_api.dll");
         } catch (_) {
-          lib = DynamicLibrary.process();
-          print("Loaded process");
+          lib = DynamicLibrary.executable();
+          print("Loaded executable");
         }
       }
     } else {
