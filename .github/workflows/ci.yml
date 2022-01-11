@@ -51,6 +51,7 @@ jobs:
           flutter config --enable-macos-desktop
           flutter config --enable-linux-desktop
 
+      ## Linux integration
       - name: Install Linux dependencies
         if: ${{ matrix.platform == 'linux' }}
         run: |
@@ -66,7 +67,8 @@ jobs:
       - name: Run tests
         if: ${{ matrix.platform != 'android' }}
         working-directory: ./example
-        run: flutter test integration_test
+        run: flutter build linux
+#        run: flutter test integration_test
 
       ## Android integration
       - name: Run tests on Android Emulator
