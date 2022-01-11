@@ -18,7 +18,7 @@ class DartDlApi {
     DynamicLibrary lib;
     if (Platform.isIOS || Platform.isMacOS) {
       lib = DynamicLibrary.process();
-    } else if (Platform.isAndroid) {
+    } else if (Platform.isAndroid || Platform.isLinux) {
       lib = DynamicLibrary.open("libdart_dl_api.so");
     } else if (Platform.isWindows) {
       lib = DynamicLibrary.open("dart_dl_api_plugin.dll");
