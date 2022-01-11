@@ -39,21 +39,18 @@ jobs:
         if: ${{ matrix.platform == 'macos' }}
         run: flutter config --enable-macos-desktop
 
+      ## Android integration
+      - name: Run tests on Android Emulator
+        if: ${{ matrix.platform == 'android' }}
+        uses: ky1vstar/android-emulator-runner@v2
+        with:
+          api-level: 29
+
       - name: Run Flutter Doctor
         run: flutter doctor
       - name: Install dependencies
         run: flutter pub get
 
       - name: Run tests
-        if: ${{ matrix.platform != 'android' }}
         working-directory: ./example
         run: flutter test integration_test
-
-      ## Android integration
-      - name: Run tests on Android Emulator
-        if: ${{ matrix.platform == 'android' }}
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          working-directory: ./example
-          script: flutter test integration_test
