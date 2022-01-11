@@ -5,11 +5,11 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  test("library is loaded correctly", () {
+  testWidgets("library is loaded correctly", (_) async {
     expect(DartDlApi.ensureInitialized, returnsNormally);
   });
 
-  test("library APIs is functional", () {
+  testWidgets("library APIs is functional", (_) async {
     late Object error;
     expect(() {
       error = DartDlApi.newApiError("some error");

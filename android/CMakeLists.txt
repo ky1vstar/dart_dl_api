@@ -27,12 +27,3 @@ target_include_directories(
 
   ../third_party/dart-sdk/src/runtime/
 )
-
-set_target_properties(
-  dart_dl_api
-
-  PROPERTIES
-
-  C_VISIBILITY_PRESET hidden
-  VISIBILITY_INLINES_HIDDEN 1
-)
