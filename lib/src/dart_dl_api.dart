@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
+import 'package:path/path.dart' as path;
 
 import 'bindings.dart';
 import 'types.dart';
@@ -14,11 +15,13 @@ class DartDlApi {
   static void ensureInitialized() {
     if (_bindings != null) return;
 
-    final DynamicLibrary lib;
+    DynamicLibrary lib;
     if (Platform.isIOS || Platform.isMacOS) {
       lib = DynamicLibrary.process();
     } else if (Platform.isAndroid) {
       lib = DynamicLibrary.open("libdart_dl_api.so");
+    } else if (Platform.isWindows) {
+      lib = DynamicLibrary.open("dart_dl_api_plugin.dll");
     } else {
       throw UnsupportedError(
         'package:dart_dl_api does not support ${Platform.operatingSystem}'
