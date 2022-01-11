@@ -25,7 +25,10 @@ set_target_properties(${PLUGIN_NAME} PROPERTIES
   CXX_VISIBILITY_PRESET hidden
   C_VISIBILITY_PRESET default
 )
-target_compile_definitions(${PLUGIN_NAME} PRIVATE FLUTTER_PLUGIN_IMPL)
+target_compile_definitions(${PLUGIN_NAME} PRIVATE 
+  FLUTTER_PLUGIN_IMPL
+  DART_SHARED_LIB
+)
 target_include_directories(${PLUGIN_NAME} INTERFACE
   "${CMAKE_CURRENT_SOURCE_DIR}/include"
   ../third_party/dart-sdk/src/runtime/
