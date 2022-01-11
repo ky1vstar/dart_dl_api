@@ -22,9 +22,7 @@ add_library(${PLUGIN_NAME} SHARED
 )
 apply_standard_settings(${PLUGIN_NAME})
 set_target_properties(${PLUGIN_NAME} PROPERTIES
-  CXX_VISIBILITY_PRESET hidden
-  C_VISIBILITY_PRESET default
-)
+  CXX_VISIBILITY_PRESET hidden)
 target_compile_definitions(${PLUGIN_NAME} PRIVATE 
   FLUTTER_PLUGIN_IMPL
   DART_SHARED_LIB
@@ -34,6 +32,9 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
   ../third_party/dart-sdk/src/runtime/
 )
 target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
+# Silence dart_api_dl.c(24,67):
+# warning C4152: nonstandard extension, function/data pointer conversion in expression
+# error C2220: the following warning is treated as an error
 target_compile_options(${PLUGIN_NAME} PRIVATE /wd4152)
 
 # List of absolute paths to libraries that should be bundled with the plugin

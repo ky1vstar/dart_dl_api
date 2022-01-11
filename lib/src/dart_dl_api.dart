@@ -21,18 +21,7 @@ class DartDlApi {
     } else if (Platform.isAndroid) {
       lib = DynamicLibrary.open("libdart_dl_api.so");
     } else if (Platform.isWindows) {
-      try {
-        lib = DynamicLibrary.open("dart_dl_api.dll");
-        print("Loaded dart_dl_api.dll");
-      } catch (_) {
-        try {
-          lib = DynamicLibrary.open("dart_dl_api_plugin.dll");
-          print("Loaded dart_dl_api_plugin.dll");
-        } catch (_) {
-          lib = DynamicLibrary.executable();
-          print("Loaded executable");
-        }
-      }
+      lib = DynamicLibrary.open("dart_dl_api_plugin.dll");
     } else {
       throw UnsupportedError(
         'package:dart_dl_api does not support ${Platform.operatingSystem}'
