@@ -56,7 +56,7 @@ jobs:
         if: ${{ matrix.platform == 'linux' }}
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y ninja-build libgtk-3-dev libglu1-mesa clang cmake pkg-config xvfb
+          sudo apt-get install -y ninja-build libgtk-3-dev libglu1-mesa
 
       - name: Run Flutter Doctor
         run: flutter doctor
@@ -65,20 +65,11 @@ jobs:
 
       ## Non-Android integration
       - name: Run tests
-        if: ${{ matrix.platform != 'android' && matrix.platform != 'linux' }}
-        working-directory: ./example
-        run: |
-          nohup Xvfb :1 -screen 0 640x480x24 -fbdir /var/tmp&
-          export DISPLAY=localhost:1.0
-          xdpyinfo -display :1 >/dev/null 2>&1 && echo "In use" || echo "Free"
-          flutter test integration_test
-
-      - name: Run headless test
-        if: ${{ matrix.platform == 'linux' }}
+        if: ${{ matrix.platform != 'android' }}
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: flutter test integration_test
           working-directory: ./example
+          run: flutter test integration_test
 
       ## Android integration
       - name: Run tests on Android Emulator
