@@ -65,13 +65,20 @@ jobs:
 
       ## Non-Android integration
       - name: Run tests
-        if: ${{ matrix.platform != 'android' }}
+        if: ${{ matrix.platform != 'android' && matrix.platform != 'linux' }}
         working-directory: ./example
         run: |
           nohup Xvfb :1 -screen 0 640x480x24 -fbdir /var/tmp&
           export DISPLAY=localhost:1.0
           xdpyinfo -display :1 >/dev/null 2>&1 && echo "In use" || echo "Free"
           flutter test integration_test
+
+      - name: Run headless test
+        if: ${{ matrix.platform == 'linux' }}
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: flutter test integration_test
+          working-directory: ./example
 
       ## Android integration
       - name: Run tests on Android Emulator
