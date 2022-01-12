@@ -70,6 +70,7 @@ jobs:
         run: |
           Xvfb :1 -screen 0 640x480x24 -fbdir /var/tmp&
           export DISPLAY=localhost:1.0
+          xdpyinfo -display :0 >/dev/null 2>&1 && echo "In use" || echo "Free"
           flutter test integration_test
 
       ## Android integration
