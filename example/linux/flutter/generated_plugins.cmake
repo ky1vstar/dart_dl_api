@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  dart_dl_api
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)
