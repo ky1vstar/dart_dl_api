@@ -11,7 +11,6 @@ dependencies:
   ffi: ^1.1.2
   flutter:
     sdk: flutter
-  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +36,8 @@ flutter:
       macos:
         pluginClass: DartDlApiPlugin
       windows:
+        pluginClass: DartDlApiPlugin
+      linux:
         pluginClass: DartDlApiPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
